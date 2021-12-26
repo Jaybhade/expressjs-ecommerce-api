@@ -1,10 +1,14 @@
 import mongoose from 'mongoose'
 
+const dotenv = require('dotenv')
+
+dotenv.config()
+
 import { app } from './app'
 
 const start = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/ticket', {
+    await mongoose.connect(process.env.MONGODB!, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
@@ -14,8 +18,8 @@ const start = async () => {
     console.error(err)
   }
 
-  app.listen(4000, () => {
-    console.log('Listening on port 4000!!!!!!!!')
+  app.listen(process.env.PORT || 4000, () => {
+    console.log('Listening!!!!!!!!')
   })
 }
 
